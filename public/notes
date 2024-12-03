@@ -1,0 +1,98 @@
+1.superadmin@gmail.com pass: 11111111
+
+composer create-project laravel/laravel attendance-app
+1. cmd
+
+php artisan make:controller
+php artisan make:middleware 
+php artisan make:model category -m
+php artisan migrate
+2. Laravel breeeze
+
+database/migration	create tables
+app/models/user.php	authentication
+resources/views/	front end
+http/controller/auth	user create
+
+routes/web.php 		create routing
+
+app/http/controllers/auth/authentication  separate usertype to thier own dashboards
+
+app/http/middleware/	create session not allowed
+bootstrap/app.php	register middleware
+routse/web.php 		use middleware
+
+//stop at css 7:45 ep 3
+
+
+features added
+18: login and register : usertypes : middleware security : route path for usertypes
+19: admin (category,size,payment) toastr notif
+20: category,size,payment display
+
+8~:12
+
+
+SUPER ADMIN
+
+USER: onlymark@gmail.com
+
+===
+ separete total per checkout for fees
+
+
+ order search by product name
+ 5 items per row
+
+//order page
+ pending
+ to pay
+ to ship
+ to receive
+ delivered
+
+ php artisan serve --host 192.168.1.2 --port=8000 
+
+
+GLOBAL PAGE:
+Landing page
+Sign in and Sign up
+
+
+ESHOP PAGE:
+Landing Page /
+Shops Page /
+Single shop page/ sort by price. sort by latest
+Single item page /
+Search Page / ui kulang
+Cart Page /
+checkout page
+Order Page
+Track order page
+profile page/
+order_status page /
+
+
+Footer
+1. Home
+2. Shops
+3. About Us
+4. Search
+5. Profile
+
+
+==/view_shop
+/profile
+/order
+
+    <div class="order-tabs">
+        <a href="{{ url('order_status') }}" class="order-tab {{ request('shipping_name') ? '' : 'active' }}">All</a>
+        @foreach ($ships as $ship)
+            <a href="{{ url('order_status') }}?shipping_name={{ $ship->shipping_name }}" 
+              class="order-tab {{ request('shipping_name') == $ship->shipping_name ? 'active' : '' }}">
+                {{ $ship->shipping_name }}
+            </a>
+        @endforeach
+    </div>
+
+    {{ url()->previous() }}

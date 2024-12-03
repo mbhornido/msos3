@@ -1,0 +1,151 @@
+
+/* Main Container */
+.register-container {
+    margin: 7% 0;
+    display: flex;
+    width: 80%;
+    max-width: 900px;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Left Section (Form) */
+.register-content {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.register-logo {
+    text-align: center;
+    margin-bottom: 0px;
+}
+
+.register-logo img {
+    width: 150px;
+}
+
+.register-header {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.register-header h3 {
+    font-size: 26px;
+    color: #004aad;
+}
+
+.register-header p {
+    font-size: 16px;
+    color: #666;
+}
+
+.register-button {
+    background: #004aad;
+    color: #fff;
+    border: none;
+    padding: 15px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 20px;
+    transition: background 0.3s ease;
+}
+
+.register-button:hover {
+    background: #003580;
+}
+
+.signin-link {
+    text-align: center;
+    font-size: 14px;
+}
+
+.signin-link a {
+    color: #004aad;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.signin-link a:hover {
+    text-decoration: underline;
+}
+
+/* Right Section (Image) */
+.register-image {
+    flex: 1;
+    background: #004aad;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.register-image img {
+    max-width: 80%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.text-danger{
+    color: red;
+}
+
+
+.register-form-group {
+    margin-bottom: 10px;
+}
+
+.register-form-group label {
+    display: block;
+    margin-bottom: 6px;
+    color: #444;
+    font-size: 16px
+}
+
+.register-form-group input {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+.register-form-group input:focus {
+    border-color: #004aad;
+    outline: none;
+}
+
+
+@media (max-width: 768px) {
+    .register-container {
+        flex-direction: column;
+        background-color: #fff;
+        margin-top: 15%;
+
+        width: 100%;
+        border-radius: 0;
+        overflow: hidden;
+        box-shadow: none;
+        
+    }
+
+    .register-image {
+        display: none;
+    }
+
+    .register-logo img {
+        display: none;
+    }
+
+    .register-content{
+        margin-top: 2rem;
+    }
+
+
+}

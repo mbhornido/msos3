@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seller Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<style>
+    /* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    
+}
+
+/* Main Content Styling */
+.main-content {
+    padding: 20px;
+}
+
+/* Seller Details Section */
+.seller-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #f4f4f4;
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+
+.seller-info {
+    display: flex;
+    align-items: center;
+}
+
+.seller-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+
+.primary-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.primary-button:hover {
+    background-color: #0056b3;
+}
+
+/* Navigation Bar */
+.nav-bar {
+    overflow-x: auto;
+    margin: 20px 0;
+    white-space: nowrap;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+}
+
+.nav-menu li a {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    color: #333;
+    font-size: 1.1em;
+    padding: 10px 15px;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.nav-menu li a i {
+    margin-right: 8px;
+}
+
+.nav-menu li a:hover {
+    background-color: #ddd;
+}
+
+/* Products Section */
+.products {
+    margin-top: 20px;
+}
+
+.products h2 {
+    margin-bottom: 20px;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.product-card {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.product-card img {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.secondary-button {
+    padding: 8px 16px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.secondary-button:hover {
+    background-color: #218838;
+}
+
+@media (max-width: 768px) {
+    .seller-details {
+        flex-direction: column;
+        text-align: center;
+    }
+    .seller-info {
+        flex-direction: column;
+        margin-bottom: 10px;
+    }
+    .nav-menu {
+        gap: 10px;
+        font-size: 0.9em;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-menu li a {
+        padding: 8px 10px;
+    }
+    .product-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+<body>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+        <!-- Seller Details -->
+        <section class="seller-details">
+            <div class="seller-info">
+                <img src="https://via.placeholder.com/100" alt="Seller Profile Picture" class="seller-img">
+                <div>
+                    <h3>John Doe</h3>
+                    <p>Rating: <i class="fas fa-star"></i> 4.8</p>
+                    <p>Products Sold: 1200</p>
+                </div>
+            </div>
+            <button class="primary-button">Edit Profile</button>
+        </section>
+
+        <!-- Navigation Bar -->
+        <nav class="nav-bar">
+            <ul class="nav-menu">
+                <li><a href="#"><i class="fas fa-box"></i> Products</a></li>
+                <li><a href="#"><i class="fas fa-layer-group"></i> Categories</a></li>
+                <li><a href="#"><i class="fas fa-chart-line"></i> Sales</a></li>
+                <li><a href="#"><i class="fas fa-user"></i> Seller Profile</a></li>
+                <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+            </ul>
+        </nav>
+
+        <!-- Product Showcase -->
+        <section class="products">
+            <h2>Products</h2>
+            <div class="product-grid">
+                <!-- Product Item -->
+                <div class="product-card">
+                    <img src="https://via.placeholder.com/150" alt="Product Image">
+                    <h3>Product Name</h3>
+                    <p>Category: Electronics</p>
+                    <p>Price: $150.00</p>
+                    <button class="secondary-button">Edit</button>
+                </div>
+                <div class="product-card">
+                    <img src="https://via.placeholder.com/150" alt="Product Image">
+                    <h3>Product Name</h3>
+                    <p>Category: Fashion</p>
+                    <p>Price: $50.00</p>
+                    <button class="secondary-button">Edit</button>
+                </div>
+                <!-- Add more product cards as needed -->
+            </div>
+        </section>
+    </main>
+
+</body>
+</html>
