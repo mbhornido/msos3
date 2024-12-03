@@ -41,7 +41,7 @@
     <section class="hero-section">
         <!-- Text Content -->
         <div class="hero-content">
-            <h1>Welcome to <br> <span>MSOS DIGITAL SHOP assdasdasdsa</span></h1>
+            <h1>Welcome to <br> <span>MSOS DIGITAL SHOP</span></h1>
             <p>The Multifunctional Student Organizational System where your needs are the priority!!!
                 <br> Discover the best tools and services designed to make your life easier. Join us to explore a world of possibilities.</p>
             <a href="{{url('dashboard')}}">Get Started</a>
