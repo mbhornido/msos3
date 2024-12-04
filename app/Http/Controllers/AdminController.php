@@ -577,6 +577,7 @@ class AdminController extends Controller
     }
     
 
+
     public function orderSummary()
     {
         $adminId = Auth::id();

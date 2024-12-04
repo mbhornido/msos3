@@ -299,6 +299,8 @@ class SuperController extends Controller
         $user->save(); // Save the changes
         return redirect()->route('superadmin.users')->with('success', 'User updated successfully!');
     }
+
+    
 }
 
 

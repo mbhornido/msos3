@@ -20,8 +20,47 @@
                 
                 </ul>
             </li>
-            <li><i class="fas fa-chart-line"></i> Sales</li>
-            <li><i class="fas fa-bullhorn"></i> Announcements</li>
+
+            <li class="msos-dropdown">
+                <div class="msos-dropdown-toggle">
+                    <div class="msos-drop-toggle-left">
+                        <i class="fas fa-user"></i>
+                        <p>Manage Accounts</p>
+                    </div>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <ul class="msos-dropdown-menu">
+                    <li><a href="<?php echo e(url('users')); ?>"><i class="fas fa-plus"></i> Manage User </a></li>
+                    <li><a href="<?php echo e(url('view_ship')); ?>"><i class="fas fa-plus"></i> Manage Admin </a></li>
+        
+                
+                </ul>
+            </li>
+
+
+            <li class="msos-dropdown">
+                <div class="msos-dropdown-toggle">
+                    <div class="msos-drop-toggle-left">
+                        <i class="fas fa-user"></i>
+                        <p>Account Settings</p>
+                    </div>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <ul class="msos-dropdown-menu">
+                    <li><a href="<?php echo e(url('profile')); ?>"><i class="fas fa-plus"></i> My profile </a></li>
+                    <li><a href="<?php echo e(url('view_ship')); ?>"><i class="fas fa-plus"></i> 
+                        <form method="POST" action="<?php echo e(route('logout')); ?>">
+                        <?php echo csrf_field(); ?>
+                        Logout
+        
+                        <input type="submit" value="" class="btn-1">
+                    </form> </a></li>
+        
+                
+                </ul>
+            </li>
+
+
         </ul>
     </nav>
 </aside><?php /**PATH C:\xampp\htdocs\msosfinal\msos3\resources\views/superadmin/header.blade.php ENDPATH**/ ?>
