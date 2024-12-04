@@ -188,7 +188,13 @@
     <div class="dropdown-menu dropdown-menu-right">
     <a class="dropdown-item" href="{{url('profile')}}">My Profile</a>
     <a class="dropdown-item" href="generalsettings.html">Settings</a>
-    <a class="dropdown-item" href="{{url('logout')}}">Logout</a>
+    <form method="POST" action="{{ route('logout') }}" style="display: inline;">
+        @csrf
+            <a class="dropdown-item logout pb-0" href="{{ route('logout') }}"
+            onclick="event.preventDefault(); this.closest('form').submit();">
+                <img src="{{ asset('img/icons/log-out.svg') }}" class="me-2" alt="img"> Logout
+            </a>
+        </form>
     </div>
     </div>
 

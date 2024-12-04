@@ -98,7 +98,13 @@
     <div class="dropdown-menu dropdown-menu-right">
     <a class="dropdown-item" href="<?php echo e(url('profile')); ?>">My Profile</a>
     <a class="dropdown-item" href="generalsettings.html">Settings</a>
-    <a class="dropdown-item" href="<?php echo e(url('logout')); ?>">Logout</a>
+    <form method="POST" action="<?php echo e(route('logout')); ?>" style="display: inline;">
+        <?php echo csrf_field(); ?>
+            <a class="dropdown-item logout pb-0" href="<?php echo e(route('logout')); ?>"
+            onclick="event.preventDefault(); this.closest('form').submit();">
+                <img src="<?php echo e(asset('img/icons/log-out.svg')); ?>" class="me-2" alt="img"> Logout
+            </a>
+        </form>
     </div>
     </div>
 

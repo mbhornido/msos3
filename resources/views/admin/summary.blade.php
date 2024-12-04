@@ -125,7 +125,7 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-lg-7 col-sm-12 col-12 d-flex">
+                    {{-- <div class="col-lg-7 col-sm-12 col-12 d-flex">
                         <div class="card flex-fill">
                             <div class="card-header pb-0 d-flex justify-content-between align-items-center">
                                 <h5 class="card-title mb-0">Purchase & Sales</h5>
@@ -150,9 +150,9 @@
                                 <div id="sales_charts"></div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
 
-                    <div class="col-lg-5 col-sm-12 col-12 d-flex">
+                    <div class="col-lg-5 col-sm-12 col-12 d-flex" style="width: 100%;">
                         <div class="card flex-fill">
                             <div class="card-header pb-0 d-flex justify-content-between align-items-center">
                                 <h4 class="card-title mb-0">New Orders</h4>
