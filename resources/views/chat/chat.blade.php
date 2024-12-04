@@ -157,14 +157,17 @@ button[type="submit"]:hover {
 
     <div class="container">
 
-        <header class="back_header">
-            <a href="{{ url('view_seller_profile', $user->id) }}"><i class="fa-solid fa-arrow-left"></i></a>
-           
-                <a href="{{url('mycart')}}" class="icon1"><i class="fa-solid fa-cart-shopping"></i><span>{{$count}}</span></a>
-        </header>
-    
+        @if(auth()->user()->usertype !== 'admin')
+            <header class="back_header">
+                <a href="{{ url('view_seller_profile', $user->id) }}"><i class="fa-solid fa-arrow-left"></i></a>
+                <a href="{{ url('mycart') }}" class="icon1">
+                    <i class="fa-solid fa-cart-shopping"></i><span>{{ $count }}</span>
+                </a>
+            </header>
             
-        @include('includers.user_header')
+            @include('includers.user_header')
+        @endif
+
             <div class="d_hide">
                 <br><br>
             </div>

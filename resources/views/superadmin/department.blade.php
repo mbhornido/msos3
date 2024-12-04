@@ -3,74 +3,112 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MSOS | Seller Dashboard</title>
-    <link rel="shortcut icon" href="{{asset('images/download2.png')}}" type="image/svg+xml">
-    <link rel="stylesheet" href="{{asset('css/style.css')}}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-
+    <title>MSOS | Department Dashboard</title>
+    <link rel="stylesheet" href="{{asset('css/super.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
-        <!-- user header -->
-        @include('components.header_super')
+    <div class="msos-container">
+        @include('superadmin.header')
 
+        <main class="msos-main-content">
+            <div class="msos-profile">
+                <div class="msos-profile-content">
+                    <img src="./images/COTLogo.png" alt="Logo">
+                    <div>
+                        <p>Alliance of Coders</p>
+                        <p>Super</p>
+                    </div>
+                </div>
+            </div>
 
-    <div class="container">
-        @include('components.sidebar_super')
- 
+            <div class="msos-all-content">
+                <header class="msos-header">
+                    <div class="msos-logo">Department List</div>
+                </header>
 
-        <main class="seller-content"> 
-            <h1>Welcome, super!</h1> 
-            <h3>Add department status</h3>
+                <div class="msos-content">
+                    <form action="{{ url('add_department') }}" method="post" enctype="multipart/form-data">
+                        @csrf
+                        <div class="unique-form-group">
+                            <input 
+                                type="text" 
+                                name="department" 
+                                placeholder="Enter department status" 
+                                class="unique-input-text">
+                        </div>
+                        <br>
+                        <div class="unique-form-group">
+                            <label for="department_image">Upload Image:</label>
+                            <input 
+                                type="file" 
+                                name="department_image" 
+                                id="department_image" 
+                                accept="image/*" 
+                                class="unique-file-input">
+                        </div>
+                        <br>
+                        <div class="unique-form-group">
+                            <input 
+                                type="submit" 
+                                value="Add Department" 
+                                class="unique-submit-button">
+                        </div>
+                    </form>
+                </div>
+
                 <br>
-                <form action="{{ url('add_department') }}" method="post" enctype="multipart/form-data">
-                    @csrf
-                    <div>
-                        <input type="text" name="department" placeholder="Enter department status">
-                    </div>
-                    <br>
-                    <div>
-                        <input type="file" name="department_image" accept="image/*">
-                    </div>
-                    <br>
-                    <div>
-                        <input type="submit" value="Add Department">
-                    </div>
-                </form>
-
-
-            <br><br><br>
-            <div>
-                <table>
-                    <tr>
-                        <th>department Status</th>
-                        <th>Delete</th>
-                    </tr>
-
-                    @foreach($data as $data)
-                    <tr>
-                        <td>{{$data->department_name}}</td>
-
-                    <td>
-                    @if($data->department_image)
-                        <img src="{{ asset($data->department_image) }}" alt="Department Image" style="width: 100px; height: auto;">
-                    @else
-                        No Image
-                    @endif
-                    </td>
-                        <td>
-                            <a href="{{url('delete_department',$data->id)}}"
-                            onclick="confirmation(event)">Delete</a>
-                        </td>
-                    </tr>
-
-                    @endforeach
-                </table>
+                <div class="msos-content">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Department Status</th>
+                                <th>Image</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($data as $data)
+                            <tr>
+                                <td>{{$data->department_name}}</td>
+                                <td>
+                                    @if($data->department_image)
+                                        <img 
+                                            src="{{ asset($data->department_image) }}" 
+                                            alt="Department Image" 
+                                            width="100" 
+                                            class="msos-image-preview">
+                                    @else
+                                        <span class="msos-no-image">No Image</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    <a 
+                                        class="msos-delete-btn" 
+                                        href="{{url('delete_department', $data->id)}}"
+                                        onclick="confirmation(event)">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </main>
     </div>
 
-    <!-- js files -->
+    <!-- JS Files -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="{{ asset('js/sweet.js') }}"></script>
+    <script>
+        document.querySelectorAll('.msos-dropdown-toggle').forEach(item => {
+            item.addEventListener('click', () => {
+                const dropdown = item.parentElement;
+                dropdown.classList.toggle('active');
+            });
+        });
+    </script>
 </body>
 </html>

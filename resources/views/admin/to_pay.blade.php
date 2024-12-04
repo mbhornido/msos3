@@ -30,6 +30,11 @@
                 <div class="page-title">
                     <h4>Orders with Status: "To Pay"</h4>
                 </div>
+
+                <div class="mb-3">
+                    <a href="{{ route('orders.toPay.pdf') }}" class="btn btn-primary">Download PDF</a>
+                </div>
+                
             </div>
 
             <!-- Orders Table -->
@@ -39,9 +44,8 @@
                         <tr>
                             <th>Order ID</th>
                             <th>Customer Name</th>
-                            <th>Product</th>
+                            <th>Product</th> 
                             <th>Status</th>
-                            <th>Track Order</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -51,11 +55,16 @@
                             <td>{{ $order->id }}</td>
                             <td>{{ $order->name }}<br>{{ $order->rec_address }}</td>
                             <td>
-                                <img src="/products/{{ $order->product->image }}" alt="{{ $order->product->title }}" style="width: 100px;">
+                                @php
+                                    // Decode the JSON string in the 'image' column
+                                    $orderImages = json_decode($order->product->image, true); // Decode as an associative array
+                                    $firstOrderImage = !empty($orderImages) ? $orderImages[0] : 'default.png'; // Fallback to default image
+                                @endphp
+                                <img src="/products/{{ $firstOrderImage }}" alt="{{ $order->product->title }}" style="width: 100px;">
                                 <p>{{ $order->product->title }}</p>
                             </td>
                             <td>{{ $order->status }}</td>
-                            <td>{{ $order->track }}</td>
+
                             <td>
                                 <button type="button" class="more" onclick="openOrderModal({{ $order->id }})"><img src="{{ asset('/img/icons/eye1.svg') }}" class="me-2" alt="img"></button>
                             </td>

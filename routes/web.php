@@ -6,7 +6,7 @@ use App\Http\Controllers\{
     HomeController, 
     AdminController,
     SuperController,
-    ChatController
+    ChatController 
 };
 
 // Public route for home
@@ -44,9 +44,9 @@ Route::middleware(['auth', 'no-back-after-logout'])->group(function () {
 
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard1', [ChatController::class, 'index'])->name('dashboard');
-    Route::get('/chat/{user}', [ChatController::class, 'show'])->name('chat.show');
-    Route::post('/chat/{user}', [ChatController::class, 'store'])->name('chat.store');
+    Route::get('dashboard1', [ChatController::class, 'index'])->name('dashboard');
+    Route::get('chat/{user}', [ChatController::class, 'show'])->name('chat.show');
+    Route::post('chat/{user}', [ChatController::class, 'store'])->name('chat.store');
     Route::get('chat/{user}/messages', [ChatController::class, 'getMessages'])->name('chat.show');
 
 });
@@ -98,8 +98,33 @@ Route::middleware(['auth', 'admin', 'no-back-after-logout'])->group(function () 
     Route::get('summary', [AdminController::class, 'orderSummary']);
     Route::get('order_product', [AdminController::class, 'order_product']);
 
+    Route::get('orders_delete', [AdminController::class, 'orders_delete']);
+    Route::delete('bulk_delete_orders', [AdminController::class, 'bulkDeleteOrders'])->name('bulk_delete_orders');
+
+    
+
 
     Route::get('to_pay', [AdminController::class, 'to_pay']);
+    Route::get('download_pdf_topay', [AdminController::class, 'generateToPayPDF'])->name('orders.toPay.pdf');
+
+    Route::get('to_ship', [AdminController::class, 'to_ship']);
+    Route::get('download_pdf_toship', [AdminController::class, 'generateToShipPDF'])->name('orders.toShip.pdf');
+
+    Route::get('admin_chat', [AdminController::class, 'admin_chat']);
+
+    Route::get('admin_show/{user}', [AdminController::class, 'admin_show']);
+    Route::post('admin_store/{user}', [AdminController::class, 'admin_store']);
+    Route::get('admin_get/{user}/messages', [AdminController::class, 'admin_getMessages']);
+
+
+    // Route::get('filter-orders', 'AdminOrderController@filterOrders')->name('filter.orders');
+    // Route::get('export-orders-pdf', 'AdminOrderController@exportOrdersPDF')->name('export.orders.pdf');
+    // Route::get('filter_orders', [AdminController::class, 'filterOrders']);
+    // Route::get('export_orders_pdf', [AdminController::class, 'ExportOrdersPDF']);
+
+
+
+
 });
 Route::get('categories', [HomeController::class, 'test']);
 

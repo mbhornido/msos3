@@ -1,0 +1,209 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Poppins:wght@100..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+a{
+    text-decoration: none;
+    color: #333;
+}
+body {
+    font-family: 'Fredoka', Arial, sans-serif;
+    display: flex;
+    background-color: #f8f9fa;
+}
+
+.msos-container {
+    display: flex;
+    width: 100%;
+}
+
+.msos-sidebar {
+    width: 250px;
+    background-color: #ffffff;
+    padding: 20px;
+    border-right: 1px solid #ddd;
+}
+
+.msos-sidebar h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.msos-sidebar ul {
+    list-style: none;
+}
+
+.msos-sidebar ul li {
+    margin: 10px 0;
+    font-size: 18px;
+    color: #555;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.msos-sidebar ul li i {
+    margin-right: 10px;
+}
+
+.msos-dropdown {
+    display: flex;
+    flex-direction: column;
+}
+
+.msos-dropdown-menu {
+    display: none;
+    list-style: none;
+}
+
+.msos-dropdown .msos-dropdown-toggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.msos-drop-toggle-left {
+    display: flex;
+}
+
+.msos-dropdown.active .msos-dropdown-menu {
+    display: block;
+}
+
+.msos-main-content {
+    width: 100%;
+}
+
+.msos-all-content {
+    margin: 20px;
+}
+
+.msos-profile {
+    background-color: white;
+    padding: 8px;
+    text-align: right;
+}
+
+.msos-profile-content {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    gap: 1rem;
+}
+
+.msos-profile-content div {
+    text-align: center;
+}
+
+.msos-profile-content img {
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50%;
+}
+
+.msos-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+}
+
+.msos-logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.msos-add-category-btn {
+    background-color: #ff6600;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.msos-add-category-btn:hover {
+    background-color: #ff4500;
+}
+
+.msos-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.msos-edit-btn, .msos-delete-btn {
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 16px;
+    margin-right: 5px;
+}
+
+
+.unique-form {
+    width: 300px;
+    padding: 20px;
+    display: flex;
+}
+
+.unique-form-group {
+    margin-bottom: 5px;
+}
+
+.unique-input-text {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.unique-submit-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #ff6600;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.unique-submit-button:hover {
+    background-color: #ff4500;
+}
+
+@media (max-width: 768px) {
+    .msos-sidebar {
+        width: 60px;
+        overflow: hidden;
+    }
+
+    .msos-add-category-btn {
+        padding: 8px;
+    }
+}

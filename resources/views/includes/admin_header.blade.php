@@ -224,16 +224,17 @@
 <a href="javascript:void(0);"><img src="{{asset('img/icons/sales1.svg')}}" alt="img"><span> Sales</span> <span class="menu-arrow"></span></a>
 <ul>
 <li><a href="{{url('admin_orders')}}">Order List</a></li>
+<li><a href="{{url('order_product')}}">Total Orders</a></li>
 <li><a href="{{url('to_pay')}}">To pay</a></li>
-<li><a href="pos.html">To ship</a></li>
+<li><a href="{{url('to_ship')}}">To ship</a></li>
 <li><a href="salesreturnlists.html">To receive</a></li>
 <li><a href="createsalesreturns.html">Delivered</a></li>
 </ul>
 </li>
 <li class="submenu">
-<a href="javascript:void(0);"><img src="{{asset('img/icons/purchase1.svg')}}" alt="img"><span> Announcements</span> <span class="menu-arrow"></span></a>
+<a href="javascript:void(0);"><img src="{{asset('img/icons/purchase1.svg')}}" alt="img"><span> Chat and Support</span> <span class="menu-arrow"></span></a>
 <ul>
-<li><a href="purchaselist.html">Announcement List</a></li>
+<li><a href="{{url('admin_chat')}}">Chat</a></li>
 <li><a href="addpurchase.html">Add Announcement</a></li>
 </ul>
 </li>

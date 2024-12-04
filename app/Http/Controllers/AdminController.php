@@ -5,19 +5,70 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Size;  
-use App\Models\Payment;
+use App\Models\Payment; 
 use App\Models\Product; 
 use App\Models\Order; 
 use App\Models\Ship;
-
-use App\Models\Scategory;
-
+use App\Models\Chat;
+use App\Models\User;
 use Carbon\Carbon;
+use App\Models\Scategory;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use PDF;
 
 class AdminController extends Controller 
 {
+
+    public function admin_chat()
+    {
+        $users = User::where('id', '!=', auth()->id())->get();
+        return view('admin.admin_chat', compact('users'));
+    } 
+
+    
+    public function admin_show(User $user){
+
+
+
+        $chats = Chat::where(function ($query) use ($user) {
+            $query->where('sender_id', auth()->id())->where('receiver_id', $user->id);
+        })->orWhere(function ($query) use ($user) {
+            $query->where('sender_id', $user->id)->where('receiver_id', auth()->id());
+        })->with('sender', 'receiver')->latest()->get();
+
+        return view('admin.admin_chat_user', compact('chats', 'user'));
+    }
+
+    public function admin_store(Request $request, User $user)
+    {
+        $request->validate(['message' => 'required|string']);
+        Chat::create([
+            'sender_id' => auth()->id(),
+            'receiver_id' => $user->id, 
+            'message' => $request->message,
+        ]);
+
+        return response()->json(['success' => true]);
+    }
+
+    public function admin_get(User $user)
+    {
+        $chats = Chat::where(function ($query) use ($user) {
+            $query->where('sender_id', auth()->id())
+                ->where('receiver_id', $user->id);
+        })->orWhere(function ($query) use ($user) {
+            $query->where('sender_id', $user->id)
+                ->where('receiver_id', auth()->id());
+        })->with('sender', 'receiver')->latest()->get();
+
+        return response()->json($chats);
+    }
+
+
+
+    
+
     public function view_category()
     {
         //$data = Category::all();
@@ -334,6 +385,39 @@ class AdminController extends Controller
         return redirect()->back();
     }
     
+    public function bulkDeleteOrders(Request $request)
+    {
+        $orderIds = $request->input('order_ids');
+
+        if ($orderIds) {
+            Order::whereIn('id', $orderIds)->delete();
+            toastr()->success('Selected orders have been deleted successfully.');
+        } else {
+            toastr()->error('No orders were selected for deletion.');
+        }
+
+        return redirect()->back();
+    }
+
+    public function orders_delete()
+    {
+        // Get the current admin's ID
+        $adminId = Auth::id();
+    
+        // Retrieve orders where the product belongs to this admin
+        $orders = Order::whereHas('product', function ($query) use ($adminId) {
+            $query->where('user_id', $adminId);
+        })->paginate(10);
+    
+        // Retrieve all shipping options
+        $shippingOptions = Ship::all();
+    
+        // Retrieve payment options added by the current admin
+        $paymentOptions = Payment::where('user_id', $adminId)->get();
+    
+        // Return the view with the filtered orders, shipping options, and payment options
+        return view('admin.orders_delete', compact('orders', 'shippingOptions', 'paymentOptions'));
+    }
     
     
     public function order_search(Request $request) 
@@ -454,6 +538,45 @@ class AdminController extends Controller
     }
     
 
+    public function filterOrders(Request $request)
+    {
+        $query = Order::query();
+        
+        // Apply filters based on request inputs
+        if ($request->filled('status')) {
+            $query->where('status', $request->status);
+        }
+        
+        if ($request->filled('rec_address')) {
+            $query->where('rec_address', 'like', '%' . $request->rec_address . '%');
+        }
+
+        $orders = $query->paginate(10); // Adjust pagination as needed
+        return view('admin.filter_orders', compact('orders'));
+    }
+
+    // Generate and download PDF
+    public function ExportOrdersPDF(Request $request)
+    {
+        $query = Order::query();
+
+        // Apply filters
+        if ($request->filled('status')) {
+            $query->where('status', $request->status);
+        }
+        
+        if ($request->filled('rec_address')) {
+            $query->where('rec_address', 'like', '%' . $request->rec_address . '%');
+        }
+
+        $orders = $query->get(); // Fetch all filtered orders
+
+        // Load the view and pass the data
+        $pdf = Pdf::loadView('admin.orders_pdf', ['orders' => $orders]);
+        return $pdf->download('filtered_orders.pdf');
+    }
+    
+
     public function orderSummary()
     {
         $adminId = Auth::id();
@@ -557,5 +680,54 @@ class AdminController extends Controller
         return view('admin.to_pay', compact('orders', 'shippingOptions', 'paymentOptions'));
     }
 
+    public function generateToPayPDF()
+    {
+        $adminId = Auth::id();
 
+        $orders = Order::where('status', 'to pay')
+                    ->whereHas('product', function ($query) use ($adminId) {
+                        $query->where('user_id', $adminId);
+                    })->get();
+
+        // Load a view specifically for PDF export
+        $pdf = PDF::loadView('admin.pdf_orders_to_pay', compact('orders'));
+        
+        return $pdf->download('to-pay-orders.pdf');
+    }
+
+
+        public function to_ship()
+    {
+        // Get the current admin's ID
+        $adminId = Auth::id();
+
+        // Retrieve only orders with a status of "to pay" where the product belongs to this admin
+        $orders = Order::where('status', 'to ship')
+                    ->whereHas('product', function ($query) use ($adminId) {
+                        $query->where('user_id', $adminId);
+                    })
+                    ->paginate(10); // Paginate as needed
+
+        // Retrieve shipping and payment options related to this admin
+        $shippingOptions = Ship::all();
+        $paymentOptions = Payment::where('user_id', $adminId)->get();
+
+        // Return the view with the "to pay" orders, shipping options, and payment options
+        return view('admin.to_ship', compact('orders', 'shippingOptions', 'paymentOptions'));
+    }
+
+    public function generateToShipPDF()
+    {
+        $adminId = Auth::id();
+
+        $orders = Order::where('status', 'to ship')
+                    ->whereHas('product', function ($query) use ($adminId) {
+                        $query->where('user_id', $adminId);
+                    })->get();
+
+        // Load a view specifically for PDF export
+        $pdf = PDF::loadView('admin.pdf_orders_to_ship', compact('orders'));
+        
+        return $pdf->download('to-ship-orders.pdf');
+    }
 }

@@ -17,4 +17,10 @@ class Chat extends Model
     {
         return $this->belongsTo(User::class, 'receiver_id');
     }
-}
+
+    public function chats()
+    {
+        return Chat::where('sender_id', $this->id)
+                ->orWhere('receiver_id', $this->id);
+    }
+    }

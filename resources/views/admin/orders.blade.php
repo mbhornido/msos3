@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="{{ asset('plugins/fontawesome/css/all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css_admin/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css_admin/new.css') }}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
 
@@ -80,7 +82,11 @@
                             </select>
 
                             <button type="submit" class="btn btn-primary">Update</button>
+                            <a href="{{url('orders_delete')}}" class="btn btn-danger mb-3"><i class="fa-solid fa-repeat"></i> <i class="fa-solid fa-trash"></i></a>
+
+
                         </div>
+
 
                         <!-- Orders Table -->
                         <div class="table-responsives">
