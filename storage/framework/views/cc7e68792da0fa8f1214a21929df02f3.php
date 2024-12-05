@@ -157,7 +157,13 @@
                                                 <td><?php echo e($order->id); ?></td>
                                                 <td class="productimgname">
                                                     <a href="<?php echo e(url('admin_orders')); ?>" class="product-img">
-                                                        <img src="/products/<?php echo e($order->product->image); ?>" alt="product">
+                                                        <?php
+                                                        // Decode the JSON string in the 'image' column
+                                                        $orderImages = json_decode($order->product->image, true); // Decode as an associative array
+                                                        $firstOrderImage = !empty($orderImages) ? $orderImages[0] : 'default.png'; // Fallback to default image
+                                                    ?>
+                                                    <img src="/products/<?php echo e($firstOrderImage); ?>" alt="<?php echo e($order->product->title); ?>" style="width: 100px; height: 100px;">
+                                                    
                                                     </a>
                                                     <a href="productlist.html"><?php echo e($order->product->title ?? 'N/A'); ?></a>
                                                 </td>

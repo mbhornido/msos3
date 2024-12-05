@@ -182,7 +182,13 @@
                                                 <td>{{ $order->id }}</td>
                                                 <td class="productimgname">
                                                     <a href="{{url('admin_orders')}}" class="product-img">
-                                                        <img src="/products/{{ $order->product->image }}" alt="product">
+                                                        @php
+                                                        // Decode the JSON string in the 'image' column
+                                                        $orderImages = json_decode($order->product->image, true); // Decode as an associative array
+                                                        $firstOrderImage = !empty($orderImages) ? $orderImages[0] : 'default.png'; // Fallback to default image
+                                                    @endphp
+                                                    <img src="/products/{{ $firstOrderImage }}" alt="{{ $order->product->title }}" style="width: 100px; height: 100px;">
+                                                    
                                                     </a>
                                                     <a href="productlist.html">{{ $order->product->title ?? 'N/A' }}</a>
                                                 </td>
