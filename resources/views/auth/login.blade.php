@@ -70,7 +70,7 @@
         </div>
         <div class="login-header">
             <h3>Sign In</h3>
-            <p>Please login to your account dasdsadsadsa</p>
+            <p>Please login to your account</p>
         </div>
         <form method="POST" action="{{ route('login') }}">
             @csrf
