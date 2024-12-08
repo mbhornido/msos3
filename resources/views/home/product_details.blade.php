@@ -7,6 +7,7 @@
     <link rel="shortcut icon" href="{{asset('images/download2.png')}}" type="image/svg+xml">
     <link rel="stylesheet" href="{{asset ('css/css_file.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 
 <style>
     
@@ -85,7 +86,20 @@
                             <i class="fa-solid fa-shop"></i>
                             <p class="footer_p" >Shop</p>
                         </a>
-                        <button  type="submit" class="add-to-cart">Add to Cart</button>
+                        <!-- <button  type="submit" class="add-to-cart">Add to Cart</button> -->
+                        <button @click="showAlert = true" class="add-to-cart"> Add to Cart </button>
+
+                        <div 
+                            x-show="showAlert" 
+                            @click.away="showAlert = false">
+                            <div>
+                                <h2>This is an alert!</h2>
+                                <p>You can click outside or press the button below to close it.</p>
+                                <button @click="showAlert = false">
+                                Close
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </form>
 
