@@ -7,7 +7,6 @@
     <link rel="shortcut icon" href="{{asset('images/download2.png')}}" type="image/svg+xml">
     <link rel="stylesheet" href="{{asset ('css/css_file.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 
 <style>
     
@@ -81,31 +80,13 @@
                       <label for="qity">Quantity:</label>
                     <input type="number" id="qity" class="product-quantity" name="quantity" value="1"  min="1" max="99"  required>
                     
-                    <div x-data="{ showAlert: false }" class="single">
-                        <!-- Link to seller profile -->
+                    <div class="single">
                         <a href="{{ url('view_seller_profile/' . $product_data->owner->id) }}" class="d_hide">
                             <i class="fa-solid fa-shop"></i>
-                            <p class="footer_p">Shop</p>
+                            <p class="footer_p" >Shop</p>
                         </a>
-
-                        <!-- Add to Cart Button -->
-                        <button @click="showAlert = true" class="add-to-cart"> Add to Cart </button>
-
-                        <!-- Alert Pop-up -->
-                        <div 
-                            x-show="showAlert" 
-                            @click.away="showAlert = false"
-                            class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-                            <div class="p-6 bg-white rounded shadow-lg">
-                                <h2>This is an alert!</h2>
-                                <p>You can click outside or press the button below to close it.</p>
-                                <button @click="showAlert = false" class="mt-4 px-4 py-2 text-white bg-red-500 rounded hover:bg-red-600">
-                                    Close
-                                </button>
-                            </div>
-                        </div>
+                        <button  type="submit" class="add-to-cart">Add to Cart</button>
                     </div>
-
                 </form>
 
                 <p class="product-availability">Product Sold: <span>{{ $product_data->quantity }}</span></p>
