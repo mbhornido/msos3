@@ -66,7 +66,7 @@
                 <p class="product-description">
                     {{$product_data->description}}
                 </p>
-                <form action="{{ route('cart.add') }}" method="POST">
+                <form action="" method="POST">
                         @csrf
                         <input type="hidden" name="product_id" value="{{ $product_data->id }}">
 
